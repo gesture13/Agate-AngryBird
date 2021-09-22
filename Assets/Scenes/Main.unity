@@ -463,12 +463,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 351555769}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9c071f00fb4c164abcf3624d60e3e1b, type: 3}
+  m_Script: {fileID: 11500000, guid: d531a0c436b05b14c82609c842f21568, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Parent: {fileID: 0}
   RigidBody: {fileID: 351555772}
   Collider: {fileID: 351555771}
+  fieldofImpact: 2
+  force: 200
+  Explosion: 1
+  ExplosionEffect: {fileID: 5400196060083933424, guid: 0943f6075e4ee594caaa1a666c906751,
+    type: 3}
+  LayerToHit:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!58 &351555771
 CircleCollider2D:
   m_ObjectHideFlags: 0
