@@ -75,8 +75,17 @@ public class Bird : MonoBehaviour
     void OnCollisionEnter2D(Collision2D col)
     {
         _state = BirdState.HitSomething;
+
+        if(_state == BirdState.HitSomething)
+        {
+            OnHit();
+        }
     }
     public virtual void OnTap()
+    {
+        //Do nothing
+    }
+    public virtual void OnHit()
     {
         //Do nothing
     }

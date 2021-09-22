@@ -4,27 +4,39 @@ using UnityEngine;
 
 public class OwlBird : Bird
 {
+    [SerializeField]
+    public float fieldofImpact;
+    public float force;
+    public bool Explosion = false;
 
-    public float delay = 3f;
-    float countdown;
-    // Start is called before the first frame update
-    void Start()
-    {
-        countdown = delay;
-    }
+    public GameObject ExplosionEffect;
+    public LayerMask LayerToHit;
 
-    // Update is called once per frame
-    void Update()
+    public void Explode()
     {
-        countdown -= Time.deltaTime;
-        if (countdown <= 0f)
+        if (State == BirdState.HitSomething && !Explosion)
         {
-            Explode();
+            Explosion = true;
         }
+        Collider2D[] objects = Physics2D.OverlapCircleAll(transform.position, fieldofImpact, LayerToHit);
+        foreach (Collider2D obj in objects)
+        {
+            Vector2 direction = obj.transform.position - transform.position;
+            obj.GetComponent<Rigidbody2D>().AddForce(direction * force);
+        }
+        Instantiate(ExplosionEffect, transform.position, Quaternion.identity);
+        Destroy(ExplosionEffect, 10);
+        Destroy(gameObject);
     }
 
-    void Explode()
+    private void OnDrawGizmosSelected()
     {
-        Debug.Log("BOOM");
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, fieldofImpact);
+    }
+
+    public override void OnHit()
+    {
+        Explode();
     }
 }
